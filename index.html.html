@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primera Presentación de Proyecto — ILM 7mo Informática 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1b2f4e;--navy2:#234068;--nl:#eef3f9;
+  --white:#fff;--off:#f7f8fa;--cream:#f2f1ec;
+  --black:#0f1117;--gray:#64748b;--lg:#e2e6ee;
+  --green:#16603a;--gbg:#ebf5f0;
+  --red:#b91c1c;--rbg:#fef2f2;
+  --amber:#b45309;--abg:#fffbeb;
+  --sans:'Inter',system-ui,sans-serif;
+  --serif:'Playfair Display',Georgia,serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+html,body{height:100%;overflow:hidden;font-family:var(--sans);background:#0c0f14}
+.ct{position:fixed;top:0;left:0;right:0;z-index:200;height:36px;background:#0c0f14;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 24px;justify-content:space-between}
+.ct-l{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.28);letter-spacing:.08em}
+.ct-r{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.22);display:flex;gap:14px}
+kbd{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.5)}
+.cb{position:fixed;bottom:0;left:0;right:0;z-index:200;height:36px;background:#0c0f14;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.navs{display:flex;gap:6px}
+.nb{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:3px 16px;cursor:pointer;font-size:11px;font-family:var(--sans);transition:all .15s}
+.nb:hover{background:rgba(255,255,255,.12);color:#fff}
+.pdots{display:flex;gap:4px;align-items:center}
+.pd{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:background .2s,transform .2s}
+.pd:hover{transform:scale(1.4)}
+.pd.on{background:rgba(255,255,255,.65)}
+.ctr{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.06em}
+.deck{position:fixed;top:36px;bottom:36px;left:0;right:0}
+.slide{display:none;position:absolute;inset:0;overflow:hidden}
+.slide.on{display:flex}
+/* COVER */
+.sc{background:var(--navy);flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:64px 80px;position:relative}
+.sc-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px}
+.cv-tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px}
+.cv-h1{font-family:var(--serif);font-size:68px;font-weight:700;color:#fff;line-height:1.0;margin-bottom:40px}
+.cv-h1 em{font-style:italic;font-weight:400;color:rgba(255,255,255,.4)}
+.cv-team{display:flex;gap:28px;margin-bottom:32px;flex-wrap:wrap}
+.cv-m{display:flex;align-items:center;gap:10px}
+.cv-mn{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.25)}
+.cv-mm{font-size:15px;font-weight:500;color:rgba(255,255,255,.85)}
+.cv-date{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+/* STANDARD */
+.ss{flex-direction:row;background:var(--white)}
+.sb{width:256px;flex-shrink:0;background:var(--navy);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.sb::after{content:'';position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.025);pointer-events:none}
+.sb-tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px}
+.sb-h{font-family:var(--serif);font-size:26px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:6px}
+.sb-s{font-size:11px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:20px}
+.sb-rule{width:28px;height:1px;background:rgba(255,255,255,.18);margin-bottom:20px}
+.sb-note{font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;font-style:italic;margin-top:auto}
+.sb-ex{margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.sb-ei{font-size:10px;color:rgba(255,255,255,.45);line-height:1.5}
+.sb-ei strong{color:rgba(255,255,255,.75)}
+.main{flex:1;padding:28px 36px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;background:var(--off)}
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;font-size:10px;font-family:var(--mono);letter-spacing:.04em;padding:3px 8px;border-radius:3px;white-space:nowrap}
+.cn{background:var(--navy);color:#fff}.cg{background:var(--gbg);color:var(--green);border:1px solid #b2dcc5}
+.cgr{background:var(--lg);color:var(--gray)}.cr{background:var(--rbg);color:var(--red);border:1px solid #fca5a5}
+.ca{background:var(--abg);color:var(--amber);border:1px solid #fcd34d}
+/* PROFILE */
+.pfc{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.pfav{width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;font-weight:600;flex-shrink:0}
+.pfn{font-size:16px;font-weight:700;margin-bottom:2px;color:var(--black)}.pfr{font-size:11px;color:var(--gray);margin-bottom:8px}
+.cr2{display:flex;gap:5px;flex-wrap:wrap}
+/* TECNICA */
+.tec{background:var(--nl);border:1px solid #c8d9ed;border-radius:6px;padding:12px 16px}
+.tec-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy2);margin-bottom:4px}
+.tec-t{font-size:12px;color:var(--navy);line-height:1.55}
+/* CHECK */
+.chk{background:var(--gbg);border:1px solid #b2dcc5;border-radius:4px;padding:8px 14px;font-size:11px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:7px}
+/* SINTOMAS */
+.sil{display:flex;flex-direction:column;gap:7px}
+.si{background:var(--white);border:1px solid var(--lg);border-radius:5px;padding:10px 14px;display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.si-ic{font-size:17px;line-height:1}.si-t{font-size:12px;line-height:1.55;color:var(--black)}
+.si-t strong{font-weight:600}.si-t span{color:var(--gray)}
+/* ANALYSIS */
+.an-note{font-size:11px;color:var(--gray);font-style:italic;padding:8px 14px;background:var(--cream);border-left:3px solid var(--lg);border-radius:0 4px 4px 0}
+table.an{width:100%;border-collapse:collapse;font-size:11px;border-radius:6px;overflow:hidden}
+table.an thead th{background:var(--navy);color:#fff;padding:9px 14px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.04em}
+table.an tbody tr:nth-child(even) td{background:var(--off)}
+table.an tbody tr:nth-child(odd) td{background:var(--white)}
+table.an tbody td{padding:9px 14px;font-size:11px;border-bottom:1px solid var(--lg);vertical-align:top;line-height:1.5;color:var(--black)}
+.rft{display:inline-block;font-size:9px;font-family:var(--mono);background:var(--navy);color:#fff;padding:1px 6px;border-radius:2px;margin-right:3px;white-space:nowrap}
+.an-f{font-size:10px;color:var(--green);font-weight:600;padding:7px 14px;background:var(--gbg);border:1px solid #b2dcc5;border-radius:4px}
+/* DATOS */
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dato{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:14px 16px}
+.dl{font-size:9px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:6px}
+.dv{font-size:28px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:4px;font-family:var(--serif)}
+.dv.sm{font-size:18px}.dt{font-size:10px;color:var(--green);font-weight:600}
+/* PERFILES */
+.pfg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pf{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:14px;border-top:3px solid var(--navy)}
+.pf.g{border-top-color:var(--green)}.pf.a{border-top-color:var(--amber)}
+.pfav2{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
+.av-n{background:var(--nl);color:var(--navy)}.av-g{background:var(--gbg);color:var(--green)}.av-a{background:var(--abg);color:var(--amber)}
+.pfn2{font-size:13px;font-weight:700;color:var(--black);margin-bottom:1px}.pfr2{font-size:10px;color:var(--gray);margin-bottom:10px}
+.pfrows{display:flex;flex-direction:column;gap:0}
+.pfrow{font-size:10px;padding:5px 0;border-top:1px solid var(--lg);display:flex;gap:6px;line-height:1.4}
+.pk{color:var(--gray);min-width:52px;flex-shrink:0}.pv{font-weight:600;color:var(--black)}
+/* RF */
+.rfl{display:flex;flex-direction:column;gap:0;border-radius:6px;overflow:hidden;border:1px solid var(--lg)}
+.rfr{display:flex;background:var(--white);border-bottom:1px solid var(--lg)}.rfr:last-child{border-bottom:none}
+.rfs{width:72px;flex-shrink:0;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 6px;gap:3px}
+.rfc{font-family:var(--mono);font-size:10px;font-weight:600}
+.rfp{font-size:8px;opacity:.5}.rfp.alta{color:#fca5a5;opacity:1}.rfp.media{color:#fcd34d;opacity:1}
+.rfb{flex:1;padding:10px 16px}.rft2{font-size:12px;font-weight:700;color:var(--black);margin-bottom:2px}
+.rfd{font-size:11px;color:var(--gray);line-height:1.45}
+.rfnb{display:inline-block;font-size:8px;font-family:var(--mono);background:var(--abg);color:var(--amber);border:1px solid #fcd34d;padding:1px 5px;border-radius:2px;margin-left:6px;vertical-align:middle}
+/* RNF */
+.rnfl{display:flex;flex-direction:column;gap:0;border-radius:6px;overflow:hidden;border:1px solid var(--lg)}
+.rnfr{display:flex;background:var(--white);border-bottom:1px solid var(--lg)}.rnfr:last-child{border-bottom:none}
+.rnfs{width:72px;flex-shrink:0;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 6px;gap:3px}
+.rnfc{font-family:var(--mono);font-size:10px;font-weight:600}.rnft{font-size:8px;opacity:.6;text-align:center}
+/* ALCANCE */
+.alg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.alc{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:12px 16px}
+.alt{font-size:10px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.alt.y{color:var(--green)}.alt.n{color:var(--red)}
+.ali{font-size:11px;color:var(--gray);padding:5px 0;border-bottom:1px solid var(--lg);display:flex;align-items:center;gap:8px}
+.ali:last-child{border-bottom:none}
+.ald{width:5px;height:5px;border-radius:50%;flex-shrink:0}.ald.y{background:var(--green)}.ald.n{background:var(--red)}
+/* OKR */
+.okrl{display:flex;flex-direction:column;gap:10px}
+.okrc{background:var(--white);border:1px solid var(--lg);border-radius:6px;overflow:hidden}
+.okrh{background:var(--navy);color:#fff;padding:10px 16px;font-size:12px;font-weight:600;line-height:1.3}
+.okrkr{display:flex;gap:10px;padding:8px 16px;border-bottom:1px solid var(--lg);font-size:11px;align-items:baseline;line-height:1.5;color:var(--black)}
+.okrkr:last-child{border-bottom:none}.krc{font-family:var(--mono);font-size:9px;color:var(--gray);min-width:34px;flex-shrink:0;padding-top:1px}
+/* BUDGET */
+.bi{font-size:12px;color:var(--gray);line-height:1.6;padding:10px 14px;background:var(--white);border:1px solid var(--lg);border-radius:5px}
+table.bud{width:100%;border-collapse:collapse;font-size:11px;border-radius:6px;overflow:hidden;border:1px solid var(--lg)}
+table.bud thead th{background:var(--navy);color:#fff;padding:9px 14px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.04em}
+table.bud thead th:last-child{text-align:right}
+table.bud tbody tr:nth-child(even) td{background:var(--off)}
+table.bud tbody tr:nth-child(odd) td{background:var(--white)}
+table.bud tbody td{padding:9px 14px;border-bottom:1px solid var(--lg);font-size:11px;color:var(--black);vertical-align:middle;line-height:1.4}
+table.bud tbody td:last-child{text-align:right;font-weight:700;color:var(--navy);font-family:var(--mono)}
+table.bud tfoot td{padding:11px 14px;font-weight:700;font-size:12px;border-top:2px solid var(--navy)}
+table.bud tfoot td:last-child{text-align:right;color:var(--navy);font-family:var(--mono);font-size:14px}
+.bcs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bnc{background:var(--nl);border:1px solid #c8d9ed;border-radius:6px;padding:12px 16px}
+.bnl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:5px}
+.bnt{font-size:11px;color:var(--navy);line-height:1.6}
+.bsum{background:var(--navy);border-radius:6px;padding:14px 18px;color:#fff}
+.bsl{font-size:10px;opacity:.5;font-family:var(--mono);letter-spacing:.08em;margin-bottom:4px}
+.bsv{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1;margin-bottom:3px}
+.bss{font-size:10px;opacity:.45;line-height:1.5}
+.ttag{display:inline-flex;align-items:center;gap:5px;background:var(--abg);color:var(--amber);border:1px solid #fcd34d;border-radius:3px;font-size:10px;font-family:var(--mono);padding:3px 8px}
+/* EQUIPO */
+.eqg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.eqc{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:14px;display:flex;gap:12px;align-items:flex-start}
+.eqav{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.eqn{font-size:14px;font-weight:700;color:var(--black);margin-bottom:2px}
+.eqr{font-size:10px;color:var(--navy);font-weight:600;margin-bottom:4px}
+.eqd{font-size:10px;color:var(--gray);line-height:1.5}
+/* GANTT */
+table.ga{width:100%;border-collapse:collapse;font-size:11px;border-radius:6px;overflow:hidden;border:1px solid var(--lg)}
+table.ga thead th{background:var(--navy);color:#fff;padding:8px 12px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.06em}
+table.ga thead th:first-child{text-align:left;width:148px}
+table.ga tbody td{padding:8px 12px;border-bottom:1px solid var(--lg);vertical-align:middle;background:var(--white)}
+table.ga tbody tr:nth-child(even) td{background:var(--off)}
+.gph{font-family:var(--mono);font-size:9px;color:var(--gray)}.gnm{font-size:11px;font-weight:600;color:var(--black)}
+.gbar{height:12px;border-radius:3px}
+.gd{background:#2d8a5a}.gnw{background:var(--navy2)}.gpl{background:#94adc8}.gpr{background:#dc2626}
+.gleg{display:flex;gap:16px;font-size:10px;color:var(--gray);padding:6px 2px}
+.gl{display:flex;align-items:center;gap:5px}.glsq{width:11px;height:11px;border-radius:2px}
+/* STEPS */
+.stl{display:flex;flex-direction:column;gap:8px}
+.str{background:var(--white);border:1px solid var(--lg);border-radius:6px;padding:12px 16px;display:flex;gap:14px;align-items:flex-start}
+.stn{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--navy);opacity:.12;line-height:1;flex-shrink:0;min-width:26px}
+.stt{font-size:12px;font-weight:700;color:var(--black);margin-bottom:2px}.std{font-size:11px;color:var(--gray);line-height:1.5}
+/* FINAL */
+.sf{background:var(--navy);flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;position:relative;overflow:hidden}
+.sf::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.ft{font-family:var(--serif);font-size:62px;font-weight:700;color:#fff;line-height:1.0}
+.ft em{font-style:italic;font-weight:400;color:rgba(255,255,255,.35)}
+.fr{width:36px;height:1px;background:rgba(255,255,255,.15)}
+.ftm{font-size:15px;color:rgba(255,255,255,.5)}.fi{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.22);letter-spacing:.12em;text-transform:uppercase}
+.fg{font-family:var(--serif);font-size:22px;color:rgba(255,255,255,.28);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="ct">
+  <div class="ct-l">Instituto Leonardo Murialdo · 7mo Informática 2026 · Bosio &amp; Goyechea</div>
+  <div class="ct-r"><span><kbd>←</kbd> <kbd>→</kbd> navegar</span><span><kbd>Esc</kbd> inicio</span></div>
+</div>
+<div class="deck">
+
+<!-- S1 COVER -->
+<div class="slide sc on" id="s1">
+  <div class="sc-grid"></div>
+  <div class="cv-tag">Instituto Leonardo Murialdo · 7mo Informática 2026</div>
+  <div class="cv-h1">Primera<br>presentación<br>de <em>proyecto</em></div>
+  <div class="cv-team">
+    <div class="cv-m"><span class="cv-mn">01</span><span class="cv-mm">Bosio, Juan José</span></div>
+    <div class="cv-m"><span class="cv-mn">02</span><span class="cv-mm">Goyechea, Joaquín</span></div>
+  </div>
+  <div class="cv-date">Mayo 2026 · Instituto Leonardo Murialdo</div>
+</div>
+
+<!-- S2 USUARIO -->
+<div class="slide ss" id="s2">
+  <div class="sb">
+    <div class="sb-tag">E01 — Identificación del problema</div><div class="sb-h">Damián De Miguel</div><div class="sb-s">Profesor independiente · 34 años · Training Point</div>
+    <div class="sb-rule"></div>
+    <div class="sb-tag">Actividad</div><div class="sb-s" style="margin-bottom:14px">Pilates (20 mujeres) y entrenamiento funcional con pelota (10 hombres)</div>
+    <div class="sb-tag">Experiencia</div><div class="sb-s" style="margin-bottom:14px">4 años y medio como profesor independiente</div>
+    <div class="sb-note">✓ Usuario entrevistado antes de escribir una sola línea de código</div>
+  </div>
+  <div class="main">
+    <div class="pfc">
+      <div class="pfav">DM</div>
+      <div><div class="pfn">Damián De Miguel</div><div class="pfr">Profesor independiente · Training Point · Pilates y entrenamiento funcional · Buenos Aires</div>
+      <div class="cr2"><span class="chip cn">34 años</span><span class="chip cn">~30 alumnos</span><span class="chip cgr">tecnología 5/5</span><span class="chip cgr">iPhone · celular</span><span class="chip cr">sin sistema digital</span></div></div>
+    </div>
+    <div class="tec"><div class="tec-l">Técnica de relevamiento</div><div class="tec-t">Entrevista estructurada <strong>Embudo + Sondeo</strong> — 23 preguntas, bloques A–F · Datos cuantificados con Escala de Likert 1–5 · Mayo 2026 · <strong>Training Point</strong></div></div>
+    <div class="chk">✓ El usuario fue entrevistado físicamente antes de escribir una sola línea de código</div>
+    <div class="sil">
+      <div class="si"><div class="si-ic">💬</div><div class="si-t"><strong>"Cobro por adelantado y aviso por WhatsApp si cambia algo"</strong> <span>— no hay sistema formal: todo pasa por grupos de WhatsApp y efectivo o MercadoPago según el alumno</span></div></div>
+      <div class="si"><div class="si-ic">📋</div><div class="si-t"><strong>"Simplemente aparecen, ya más o menos sé quién viene"</strong> <span>— no hay reserva previa. En el grupo de hombres antes preguntaba por WhatsApp para saber el cupo, pero ya dejó de hacerlo</span></div></div>
+      <div class="si"><div class="si-ic">⚠️</div><div class="si-t"><strong>"Sí, alguna vez por error mío al anotar o si se colgaban en la renovación"</strong> <span>— ocurrieron deudas por error de registro, aunque siempre se resolvieron hablando</span></div></div>
+      <div class="si"><div class="si-ic">🎯</div><div class="si-t"><strong>"Debería pagar para que yo pueda cargarle los créditos y así anotarse en las clases"</strong> <span>— el propio Damián describió exactamente el modelo de tickets que necesita implementar</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S3 ANÁLISIS -->
+<div class="slide ss" id="s3">
+  <div class="sb"><div class="sb-tag">E01</div><div class="sb-h">Análisis de la entrevista</div><div class="sb-s">Del síntoma a la causa real</div><div class="sb-rule"></div><div class="sb-note">El error más común: construir una solución al síntoma en lugar de a la causa. Si el sistema solo permite cobrar pero no gestiona la agenda, el problema no se resuelve.</div></div>
+  <div class="main">
+    <div class="an-note">✓ Cada RF se puede trazar hasta una respuesta concreta de la entrevista. Si no, no tiene razón de existir.</div>
+    <table class="an">
+      <thead><tr><th style="width:28%">Síntoma (lo que dice Damián)</th><th style="width:36%">Causa real</th><th>Solución técnica</th></tr></thead>
+      <tbody>
+        <tr><td>"Simplemente aparecen, ya sé más o menos quién viene"</td><td>No hay sistema de reservas. Sin reserva previa no puede planificar el cupo ni los ejercicios de pelota del grupo de hombres</td><td><span class="rft">RF03</span>Reserva de clase con descuento automático de ticket</td></tr>
+        <tr><td>"Alguna vez por error mío al anotar o se colgaban en la renovación"</td><td>La gestión de cobros es manual: WhatsApp + memoria + efectivo/MercadoPago sin registro centralizado. Sin trazabilidad</td><td><span class="rft">RF05</span>Panel admin con historial de pagos y saldos en tiempo real</td></tr>
+        <tr><td>"Debería pagar para que yo pueda cargarle los créditos y anotarse"</td><td>Damián describió exactamente el modelo de tickets: el alumno paga → Damián carga créditos → el alumno reserva. Hoy no existe este flujo</td><td><span class="rft">RF01</span>Sistema de tickets mensual con pago online integrado</td></tr>
+        <tr><td>"Aviso por WhatsApp si se suspende o cambia un horario"</td><td>Sin plataforma, toda comunicación es informal y unidireccional. Los alumnos no tienen visibilidad de cambios en tiempo real</td><td><span class="rft">RF06</span>Notificaciones automáticas y panel de clases actualizado</td></tr>
+        <tr><td>"Sí, existen apps similares pero son pagas"</td><td>Mindbody, Wod.guru cobran desde USD 30/mes. Una web-app propia no tiene costos de licencia ni cuota mensual por uso</td><td>Web-app publicable en GitHub Pages / Vercel sin costo de publicación</td></tr>
+      </tbody>
+    </table>
+    <div class="an-f">→ La solución correcta ataca la <strong>causa raíz</strong>, no el síntoma visible. Esta tabla es la justificación técnica del proyecto.</div>
+  </div>
+</div>
+
+<!-- S4 DATOS -->
+<div class="slide ss" id="s4">
+  <div class="sb"><div class="sb-tag">E01</div><div class="sb-h">Datos medibles</div><div class="sb-s">Línea de base y perfiles</div><div class="sb-rule"></div><div class="sb-note">Sin línea de base no hay forma de probar que el sistema funcionó al final del proyecto.</div></div>
+  <div class="main">
+    <div class="dg">
+      <div class="dato"><div class="dl">Gestión cobros / mes</div><div class="dv sm">&lt;1 hs</div><div class="dt">→ objetivo: 0 min (automático)</div></div>
+      <div class="dato"><div class="dl">Conflictos pagos / mes</div><div class="dv">~0</div><div class="dt">→ objetivo: 0 garantizado</div></div>
+      <div class="dato"><div class="dl">Dificultad (Likert)</div><div class="dv">1/5</div><div class="dt">→ ya organizado · mantener</div></div>
+      <div class="dato"><div class="dl">Comodidad tecnológica</div><div class="dv">5/5</div><div class="dt">→ adopción esperada alta</div></div>
+      <div class="dato"><div class="dl">Dispositivo principal</div><div class="dv sm">iPhone</div><div class="dt">→ mobile-first · iOS</div></div>
+      <div class="dato"><div class="dl">Experiencia independiente</div><div class="dv sm">4,5 años</div><div class="dt">→ proceso conocido y maduro</div></div>
+    </div>
+    <div class="pfg">
+      <div class="pf"><div class="pfav2 av-n">DM</div><div class="pfn2">Damián De Miguel</div><div class="pfr2">Administrador · acceso total · único admin</div><div class="pfrows"><div class="pfrow"><span class="pk">Dispositivo</span><span class="pv">iPhone · mobile-first iOS</span></div><div class="pfrow"><span class="pk">Nivel tech</span><span class="pv">5/5 — alta adopción esperada</span></div><div class="pfrow"><span class="pk">Acceso</span><span class="pv">Total: alumnos, tickets, clases</span></div></div></div>
+      <div class="pf g"><div class="pfav2 av-g">AL</div><div class="pfn2">Alumno / Alumna</div><div class="pfr2">~30 alumnos (20 chicas + 10 chicos)</div><div class="pfrows"><div class="pfrow"><span class="pk">Registro</span><span class="pv">Email + contraseña</span></div><div class="pfrow"><span class="pk">Acceso</span><span class="pv">Sus clases, saldo y pagos</span></div><div class="pfrow"><span class="pk">No ve</span><span class="pv">Datos de otros alumnos</span></div></div></div>
+      <div class="pf a"><div class="pfav2 av-a">V</div><div class="pfn2">Visitante</div><div class="pfr2">Sin cuenta · solo lectura</div><div class="pfrows"><div class="pfrow"><span class="pk">Ve</span><span class="pv">Info de clases y precios</span></div><div class="pfrow"><span class="pk">Puede</span><span class="pv">Registrarse</span></div><div class="pfrow"><span class="pk">No puede</span><span class="pv">Reservar ni pagar</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 RF -->
+<div class="slide ss" id="s5">
+  <div class="sb"><div class="sb-tag">E03</div><div class="sb-h">Requerimientos funcionales</div><div class="sb-s">RF</div><div class="sb-rule"></div><div class="sb-note">Cada RF describe <em>qué hace</em> el sistema. Deben poder trazarse a una respuesta concreta de la entrevista.</div></div>
+  <div class="main">
+    <div class="rfl">
+      <div class="rfr"><div class="rfs"><div class="rfc">RF01</div><div class="rfp alta">Alta</div></div><div class="rfb"><div class="rft2">Compra de plan mensual de tickets</div><div class="rfd">El alumno adquiere un plan (4, 8 o 12 clases) que le da tickets para reservar durante el mes</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF02</div><div class="rfp alta">Alta</div></div><div class="rfb"><div class="rft2">Pagos integrados: MercadoPago, transferencia, Debin</div><div class="rfd">El alumno paga desde la plataforma. Damián recibe confirmación automática sin intervención</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF03</div><div class="rfp alta">Alta</div></div><div class="rfb"><div class="rft2">Reserva de clase con descuento automático de ticket</div><div class="rfd">Al reservar, el sistema descuenta un ticket del saldo del alumno automáticamente</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF04</div><div class="rfp alta">Alta</div></div><div class="rfb"><div class="rft2">Historial de clases asistidas y saldo de tickets</div><div class="rfd">Cada alumno ve cuántas clases usó y cuántos tickets le quedan. Damián lo ve en su panel</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF05</div><div class="rfp alta">Alta</div></div><div class="rfb"><div class="rft2">Panel admin con lista de alumnos y estado de pagos</div><div class="rfd">Damián ve en tiempo real quién pagó, quién debe y el historial completo</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF06</div><div class="rfp media">Media</div></div><div class="rfb"><div class="rft2">Recordatorio automático 24hs antes de cada clase <span class="rfnb">nuevo</span></div><div class="rfd">Notificación automática al alumno con el horario y lugar de la clase reservada</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF07</div><div class="rfp media">Media</div></div><div class="rfb"><div class="rft2">Cancelación sin perder ticket <span class="rfnb">nuevo</span></div><div class="rfd">Si el alumno cancela con más de 2hs de anticipación, el ticket vuelve a su saldo</div></div></div>
+      <div class="rfr"><div class="rfs"><div class="rfc">RF08</div><div class="rfp media">Media</div></div><div class="rfb"><div class="rft2">Gestión de clases: crear, editar, cancelar <span class="rfnb">nuevo</span></div><div class="rfd">Damián crea clases con fecha, hora, cupo máximo y tipo (Pilates / Funcional)</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 RNF + ALCANCE -->
+<div class="slide ss" id="s6">
+  <div class="sb"><div class="sb-tag">E03</div><div class="sb-h">RNF y alcance</div><div class="sb-s">Requerimientos No Funcionales</div><div class="sb-rule"></div><div class="sb-note">Definir el alcance evita expectativas erróneas del cliente y problemas futuros.</div></div>
+  <div class="main">
+    <div class="rnfl">
+      <div class="rnfr"><div class="rnfs"><div class="rnfc">RNF-01</div><div class="rnft">plataforma</div></div><div class="rfb"><div class="rft2">Diseño mobile-first · iOS</div><div class="rfd">Flujos críticos completables con una mano en iPhone. Damián y sus alumnos usan celular como dispositivo principal</div></div></div>
+      <div class="rnfr"><div class="rnfs"><div class="rnfc">RNF-02</div><div class="rnft">seguridad</div></div><div class="rfb"><div class="rft2">Pagos seguros vía HTTPS y tokens certificados</div><div class="rfd">Transacciones por canales seguros. Datos de tarjeta nunca almacenados en el servidor</div></div></div>
+      <div class="rnfr"><div class="rnfs"><div class="rnfc">RNF-03</div><div class="rnft">HCI</div></div><div class="rfb"><div class="rft2">Interfaz simple para nivel tecnológico 3/5</div><div class="rfd">Sin menús complejos. Acción principal visible en pantalla sin necesidad de buscarla</div></div></div>
+      <div class="rnfr"><div class="rnfs"><div class="rnfc">RNF-04</div><div class="rnft">disponib.</div></div><div class="rfb"><div class="rft2">Disponibilidad ≥99% en horario de clases</div><div class="rfd">El sistema debe funcionar sin interrupciones de 7:00 a 22:00 hs todos los días</div></div></div>
+      <div class="rnfr"><div class="rnfs"><div class="rnfc">RNF-05</div><div class="rnft">privacidad</div></div><div class="rfb"><div class="rft2">Aislamiento de datos entre alumnos</div><div class="rfd">Cada alumno solo ve sus propios datos. Control en servidor, no solo en frontend</div></div></div>
+    </div>
+    <div class="alg">
+      <div class="alc"><div class="alt y">✓ El sistema HARÁ</div><div class="ali"><div class="ald y"></div>Gestión de clases y reservas con cupo</div><div class="ali"><div class="ald y"></div>Tickets mensuales con pagos online</div><div class="ali"><div class="ald y"></div>Panel admin en tiempo real</div><div class="ali"><div class="ald y"></div>Recordatorios automáticos</div><div class="ali"><div class="ald y"></div>3 perfiles: admin, alumno, visitante</div></div>
+      <div class="alc"><div class="alt n">✗ El sistema NO HARÁ</div><div class="ali"><div class="ald n"></div>Facturación AFIP / facturas</div><div class="ali"><div class="ald n"></div>App nativa iOS / Android</div><div class="ali"><div class="ald n"></div>Videollamadas o clases virtuales</div><div class="ali"><div class="ald n"></div>Gestión de múltiples profesores</div><div class="ali"><div class="ald n"></div>Integración con redes sociales (v1)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 OKRs -->
+<div class="slide ss" id="s7">
+  <div class="sb"><div class="sb-tag">E01–E03</div><div class="sb-h">OKRs del proyecto</div><div class="sb-s">Metas medibles</div><div class="sb-rule"></div><div class="sb-note">Objectives &amp; Key Results. El Objetivo es la meta inspiradora. Los KR son métricas concretas con número. Sin número, no es un KR.</div></div>
+  <div class="main">
+    <div class="okrl">
+      <div class="okrc"><div class="okrh">Objetivo 1 — Automatizar la gestión de cobros y créditos</div><div class="okrkr"><span class="krc">KR 1</span>100% de los pagos procesados por la plataforma: el alumno paga → sistema acredita tickets automáticamente</div><div class="okrkr"><span class="krc">KR 2</span>Damián deja de gestionar cobros manualmente: 0 mensajes de WhatsApp por pagos en el primer mes</div><div class="okrkr"><span class="krc">KR 3</span>El historial de pagos es consultable en tiempo real, eliminando errores de registro manual</div></div>
+      <div class="okrc"><div class="okrh">Objetivo 2 — Dar a los alumnos autonomía para gestionar su agenda</div><div class="okrkr"><span class="krc">KR 1</span>El 80% de los alumnos activos usa la plataforma para reservar clases en el primer mes</div><div class="okrkr"><span class="krc">KR 2</span>Damián deja de preguntar por WhatsApp quién viene: el sistema muestra el cupo confirmado en tiempo real</div><div class="okrkr"><span class="krc">KR 3</span>Las clases sin cupo disponible se cierran automáticamente sin intervención del profesor</div></div>
+      <div class="okrc"><div class="okrh">Objetivo 3 — Sistema de tickets que escale con el crecimiento de Training Point</div><div class="okrkr"><span class="krc">KR 1</span>Cada alumno ve su saldo de tickets y su historial de clases en tiempo real</div><div class="okrkr"><span class="krc">KR 2</span>Ningún alumno puede reservar sin tickets disponibles (control automático del sistema)</div><div class="okrkr"><span class="krc">KR 3</span>Damián puede agregar nuevos alumnos o modificar clases sin depender de mensajes individuales</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 PRESUPUESTO -->
+<div class="slide ss" id="s8">
+  <div class="sb">
+    <div class="sb-tag">E02 — Factibilidad económica</div><div class="sb-h">Presupuesto estimado</div><div class="sb-s">Tech stack y costo en horas</div><div class="sb-rule"></div>
+    <div class="sb-note">Costo en horas a tarifa junior. Todo el stack es open source y gratuito.</div>
+    <div class="sb-ex">
+      <div class="sb-ei">📦 <strong>Stack elegido</strong></div>
+      <div class="sb-ei">Frontend: React + Tailwind CSS</div>
+      <div class="sb-ei">Backend: Node.js + Express</div>
+      <div class="sb-ei">Base de datos: PostgreSQL</div>
+      <div class="sb-ei">Pagos: MercadoPago SDK</div>
+      <div class="sb-ei">Hosting: Vercel + Railway</div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="bi">Presupuesto calculado en horas de trabajo a tarifa de desarrollador <strong>junior</strong> en Argentina (2026). Todo el stack es open source: $0 en licencias. <span class="ttag" style="margin-left:8px">Tarifa junior: $3.500 / hora</span></div>
+    <table class="bud">
+      <thead><tr><th>Tarea / módulo</th><th>Descripción</th><th>Horas</th><th>Subtotal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Análisis y documentación</strong></td><td>Entrevistas, RF/RNF, OKRs, GANTT, carpeta de proyecto</td><td>20 hs</td><td>$70.000</td></tr>
+        <tr><td><strong>Diseño UX/UI (Figma)</strong></td><td>Mockup mobile-first, flujos de pantallas, validación con Damián</td><td>18 hs</td><td>$63.000</td></tr>
+        <tr><td><strong>Frontend — React</strong></td><td>Login, clases, reserva, perfil, panel alumno. Responsive mobile</td><td>35 hs</td><td>$122.500</td></tr>
+        <tr><td><strong>Backend — Node.js + Express</strong></td><td>API REST, lógica de tickets, sistema de reservas, permisos</td><td>40 hs</td><td>$140.000</td></tr>
+        <tr><td><strong>Base de datos — PostgreSQL</strong></td><td>Modelo de datos, migraciones, consultas optimizadas</td><td>15 hs</td><td>$52.500</td></tr>
+        <tr><td><strong>Integración de pagos</strong></td><td>MercadoPago SDK: cobros, webhooks, confirmación automática</td><td>20 hs</td><td>$70.000</td></tr>
+        <tr><td><strong>Notificaciones automáticas</strong></td><td>Recordatorios 24hs antes por email / push notification</td><td>10 hs</td><td>$35.000</td></tr>
+        <tr><td><strong>Testing y QA</strong></td><td>Pruebas de flujo, casos límite, prueba con usuario real</td><td>12 hs</td><td>$42.000</td></tr>
+        <tr><td><strong>Deployment y hosting</strong></td><td>Configuración Vercel (frontend) + Railway (backend + DB)</td><td>6 hs</td><td>$21.000</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2"><strong>Total estimado — 2 desarrolladores junior</strong></td><td><strong>176 hs</strong></td><td><strong>$616.000</strong></td></tr></tfoot>
+    </table>
+    <div class="bcs">
+      <div class="bnc"><div class="bnl">Hosting mensual (post-entrega)</div><div class="bnt">Vercel (frontend): <strong>$0</strong> — plan gratuito<br>Railway (backend + DB): <strong>~$5 USD/mes</strong><br>Dominio propio (opcional): ~$10 USD/año<br>MercadoPago: comisión por transacción (~3,5%)</div></div>
+      <div class="bsum"><div class="bsl">TOTAL DESARROLLO</div><div class="bsv">$616.000</div><div class="bss">176 horas · tarifa junior $3.500/h<br>Damián usa iPhone con nivel tech 5/5<br>Conoce apps similares pagas — ventaja competitiva</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S9 EQUIPO -->
+<div class="slide ss" id="s9">
+  <div class="sb"><div class="sb-tag">Gestión</div><div class="sb-h">El equipo</div><div class="sb-s">Roles del equipo</div><div class="sb-rule"></div><div class="sb-note">7mo Informática · Instituto Leonardo Murialdo 2026</div></div>
+  <div class="main">
+    <div class="eqg">
+      <div class="eqc"><div class="eqav">JB</div><div><div class="eqn">Bosio, Juan José</div><div class="eqr">Project Manager + Dev Frontend</div><div class="eqd">Gestión del proyecto, GANTT, control de cambios, OKRs · Desarrollo de interfaz mobile-first con React + Tailwind · Mockup Figma</div></div></div>
+      <div class="eqc"><div class="eqav">JG</div><div><div class="eqn">Goyechea, Joaquín</div><div class="eqr">Dev Backend + Base de Datos</div><div class="eqd">API REST con Node.js + Express · Lógica del sistema de tickets · Integración MercadoPago SDK · Modelo de datos PostgreSQL</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S10 CRONOGRAMA -->
+<div class="slide ss" id="s10">
+  <div class="sb"><div class="sb-tag">E01→E06</div><div class="sb-h">Cronograma 2026</div><div class="sb-s">Planificación temporal</div><div class="sb-rule"></div><div class="sb-note">Desde el análisis hasta la Expo en noviembre. ~7 meses.</div></div>
+  <div class="main">
+    <table class="ga">
+      <thead><tr><th>Fase</th><th>ABR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AGO</th><th>SEP–OCT</th><th>NOV</th></tr></thead>
+      <tbody>
+        <tr><td><div class="gph">E01</div><div class="gnm">Análisis y validación</div></td><td><div class="gbar gd" style="width:100%"></div></td><td><div class="gbar gd" style="width:100%"></div></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td><div class="gph">1ra Pres.</div><div class="gnm">RF, RNF, OKRs</div></td><td></td><td><div class="gbar gpr" style="width:100%"></div></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td><div class="gph">E02</div><div class="gnm">Factibilidad y benchmarking</div></td><td></td><td></td><td><div class="gbar gpl" style="width:100%"></div></td><td><div class="gbar gpl" style="width:50%"></div></td><td></td><td></td><td></td></tr>
+        <tr><td><div class="gph">E03–E04</div><div class="gnm">Diseño y prototipo Figma</div></td><td></td><td></td><td><div class="gbar gpl" style="width:50%"></div></td><td><div class="gbar gpl" style="width:100%"></div></td><td><div class="gbar gpl" style="width:50%"></div></td><td></td><td></td></tr>
+        <tr><td><div class="gph">E05</div><div class="gnm">Desarrollo</div></td><td></td><td></td><td></td><td></td><td><div class="gbar gnw" style="width:100%"></div></td><td><div class="gbar gnw" style="width:100%"></div></td><td></td></tr>
+        <tr><td><div class="gph">E06</div><div class="gnm">⚡ Presentación final EXPO</div></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="gbar gpr" style="width:100%"></div></td></tr>
+      </tbody>
+    </table>
+    <div class="gleg"><div class="gl"><div class="glsq" style="background:#2d8a5a"></div>Completado</div><div class="gl"><div class="glsq" style="background:#234068"></div>En progreso</div><div class="gl"><div class="glsq" style="background:#94adc8"></div>Planificado</div><div class="gl"><div class="glsq" style="background:#dc2626"></div>Hito de presentación</div></div>
+  </div>
+</div>
+
+<!-- S11 PRÓXIMOS PASOS -->
+<div class="slide ss" id="s11">
+  <div class="sb"><div class="sb-tag">E01→E03</div><div class="sb-h">Próximos pasos</div><div class="sb-s">Antes de programar</div><div class="sb-rule"></div><div class="sb-note">Lo que sabemos de Damián para el HCI</div>
+    <div class="sb-ex"><div class="sb-ei">📱 <strong>iPhone</strong> — mobile-first iOS</div><div class="sb-ei">🎯 <strong>Nivel tech 5/5</strong> — alta adopción esperada</div><div class="sb-ei">💬 <strong>WhatsApp</strong> — patrón ya conocido</div><div class="sb-ei">✓ Mockup validado por Damián <em>antes</em> de escribir código</div></div>
+  </div>
+  <div class="main">
+    <div class="stl">
+      <div class="str"><div class="stn">1</div><div><div class="stt">Hacer el Benchmarking de Training Point</div><p class="std">Analizar apps similares: Mindbody, Wod.guru, Glofox. Explicar por qué son inviables para Damián (costo elevado, funciones innecesarias) y justificar por qué la web-app propia es la solución correcta.</p></div></div>
+      <div class="str"><div class="stn">2</div><div><div class="stt">Completar el estudio de factibilidad técnica</div><p class="std">Confirmar el stack tecnológico definitivo, evaluar tiempos reales de desarrollo y distribuir tareas entre el equipo según capacidades.</p></div></div>
+      <div class="str"><div class="stn">3</div><div><div class="stt">Armar el mockup en Figma</div><p class="std">Frame iPhone (390×844px) · mobile-first · flujos principales: login → ver clases → reservar → pagar con MercadoPago. Validar con Damián antes de escribir una sola línea de código.</p></div></div>
+      <div class="str"><div class="stn">4</div><div><div class="stt">Volver con Damián a validar el prototipo</div><p class="std">✓ Regla fundamental: el mockup debe estar aprobado por Damián antes de avanzar al desarrollo. El feedback se registra como hito en el control de cambios del proyecto.</p></div></div>
+      <div class="str"><div class="stn">5</div><div><div class="stt">Arrancar el desarrollo del sistema</div><p class="std">Con el mockup validado, comenzar la implementación por módulos: autenticación → gestión de clases → sistema de tickets → integración de pagos → panel admin.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 FINAL -->
+<div class="slide sf" id="s12">
+  <div class="ft">Primera<br>presentación<br>de <em>proyecto</em></div>
+  <div class="fr"></div>
+  <div class="ftm">Bosio, Juan José · Goyechea, Joaquín</div>
+  <div class="fi">7mo Informática · Instituto Leonardo Murialdo · Mayo 2026</div>
+  <div class="fg">¡Gracias! · Preguntas y consultas</div>
+</div>
+
+</div>
+<div class="cb">
+  <div class="navs"><button class="nb" onclick="go(-1)">← Anterior</button><button class="nb" onclick="go(1)">Siguiente →</button></div>
+  <div class="pdots" id="dots"></div>
+  <div class="ctr" id="ctr">1 / 12</div>
+</div>
+<script>
+let cur=1,total=12;
+const de=document.getElementById('dots');
+for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='pd'+(i===1?' on':'');d.title='Slide '+i;d.onclick=()=>goto(i);de.appendChild(d);}
+function goto(n){document.getElementById('s'+cur).classList.remove('on');de.children[cur-1].classList.remove('on');cur=Math.max(1,Math.min(total,n));document.getElementById('s'+cur).classList.add('on');de.children[cur-1].classList.add('on');document.getElementById('ctr').textContent=cur+' / '+total;}
+function go(d){goto(cur+d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);else if(e.key==='ArrowLeft')go(-1);else if(e.key==='Escape')goto(1);});
+</script>
+</body>
+</html>
