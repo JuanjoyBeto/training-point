@@ -319,41 +319,65 @@ table.ga tbody tr:nth-child(even) td{background:var(--off)}
   </div>
 </div>
 
-<!-- S8 PRESUPUESTO -->
+<!-- S8 COSTOS / HOSTING / BACKUP -->
 <div class="slide ss" id="s8">
   <div class="sb">
-    <div class="sb-tag">E02 — Factibilidad económica</div><div class="sb-h">Presupuesto estimado</div><div class="sb-s">Tech stack y costo en horas</div><div class="sb-rule"></div>
-    <div class="sb-note">Costo en horas a tarifa junior. Todo el stack es open source y gratuito.</div>
+    <div class="sb-tag">E02 — Factibilidad económica</div>
+    <div class="sb-h">Costos, Hosting y Backup</div>
+    <div class="sb-s">Roles · Infraestructura · Respaldo</div>
+    <div class="sb-rule"></div>
+    <div class="sb-note">Valores por hora según GANTT oficial del proyecto. Las horas estimadas reflejan el trabajo real de cada rol para construir el sistema desde cero.</div>
     <div class="sb-ex">
       <div class="sb-ei">📦 <strong>Stack elegido</strong></div>
       <div class="sb-ei">Frontend: React + Tailwind CSS</div>
       <div class="sb-ei">Backend: Node.js + Express</div>
       <div class="sb-ei">Base de datos: PostgreSQL</div>
       <div class="sb-ei">Pagos: MercadoPago SDK</div>
-      <div class="sb-ei">Hosting: Vercel + Railway</div>
+      <div class="sb-ei">Hosting: Server ILM → DylanHost / Hostinger</div>
     </div>
   </div>
   <div class="main">
-    <div class="bi">Presupuesto calculado en horas de trabajo a tarifa de desarrollador <strong>junior</strong> en Argentina (2026). Todo el stack es open source: $0 en licencias. <span class="ttag" style="margin-left:8px">Tarifa junior: $3.500 / hora</span></div>
+
+    <!-- TABLA DE COSTOS POR ROL -->
     <table class="bud">
-      <thead><tr><th>Tarea / módulo</th><th>Descripción</th><th>Horas</th><th>Subtotal</th></tr></thead>
+      <thead><tr><th>ID</th><th>Rol</th><th>Tareas principales</th><th>Horas est.</th><th>Valor/h</th><th>Subtotal</th></tr></thead>
       <tbody>
-        <tr><td><strong>Análisis y documentación</strong></td><td>Entrevistas, RF/RNF, OKRs, GANTT, carpeta de proyecto</td><td>20 hs</td><td>$70.000</td></tr>
-        <tr><td><strong>Diseño UX/UI (Figma)</strong></td><td>Mockup mobile-first, flujos de pantallas, validación con Damián</td><td>18 hs</td><td>$63.000</td></tr>
-        <tr><td><strong>Frontend — React</strong></td><td>Login, clases, reserva, perfil, panel alumno. Responsive mobile</td><td>35 hs</td><td>$122.500</td></tr>
-        <tr><td><strong>Backend — Node.js + Express</strong></td><td>API REST, lógica de tickets, sistema de reservas, permisos</td><td>40 hs</td><td>$140.000</td></tr>
-        <tr><td><strong>Base de datos — PostgreSQL</strong></td><td>Modelo de datos, migraciones, consultas optimizadas</td><td>15 hs</td><td>$52.500</td></tr>
-        <tr><td><strong>Integración de pagos</strong></td><td>MercadoPago SDK: cobros, webhooks, confirmación automática</td><td>20 hs</td><td>$70.000</td></tr>
-        <tr><td><strong>Notificaciones automáticas</strong></td><td>Recordatorios 24hs antes por email / push notification</td><td>10 hs</td><td>$35.000</td></tr>
-        <tr><td><strong>Testing y QA</strong></td><td>Pruebas de flujo, casos límite, prueba con usuario real</td><td>12 hs</td><td>$42.000</td></tr>
-        <tr><td><strong>Deployment y hosting</strong></td><td>Configuración Vercel (frontend) + Railway (backend + DB)</td><td>6 hs</td><td>$21.000</td></tr>
+        <tr><td><strong>PM</strong></td><td>Project Manager</td><td>Planificación, GANTT, entrevistas, documentación, reuniones con Damián</td><td>30 hs</td><td>$42.450</td><td>$1.273.500</td></tr>
+        <tr><td><strong>DUX</strong></td><td>Diseñador UX/UI</td><td>Mockup Figma mobile-first, flujos de pantallas, validación con usuario</td><td>15 hs</td><td>$38.205</td><td>$573.075</td></tr>
+        <tr><td><strong>D01</strong></td><td>Dev. Frontend</td><td>Login, pantalla de clases, reserva, perfil alumno, panel admin · React + Tailwind</td><td>35 hs</td><td>$48.110</td><td>$1.683.850</td></tr>
+        <tr><td><strong>D02</strong></td><td>Dev. Backend</td><td>API REST, lógica de tickets, reservas, autenticación, permisos, deployment</td><td>40 hs</td><td>$48.110</td><td>$1.924.400</td></tr>
+        <tr><td><strong>BD</strong></td><td>Admin. de BD</td><td>Modelo de datos PostgreSQL, migraciones, consultas optimizadas, backups</td><td>12 hs</td><td>$45.280</td><td>$543.360</td></tr>
+        <tr><td><strong>EA</strong></td><td>Esp. Automatización</td><td>Integración MercadoPago (webhooks), notificaciones automáticas 24hs</td><td>15 hs</td><td>$45.280</td><td>$679.200</td></tr>
       </tbody>
-      <tfoot><tr><td colspan="2"><strong>Total estimado — 2 desarrolladores junior</strong></td><td><strong>176 hs</strong></td><td><strong>$616.000</strong></td></tr></tfoot>
+      <tfoot>
+        <tr>
+          <td colspan="3"><strong>Total del proyecto — Training Point Web App</strong></td>
+          <td><strong>147 hs</strong></td>
+          <td>—</td>
+          <td><strong>$6.677.385</strong></td>
+        </tr>
+      </tfoot>
     </table>
-    <div class="bcs">
-      <div class="bnc"><div class="bnl">Hosting mensual (post-entrega)</div><div class="bnt">Vercel (frontend): <strong>$0</strong> — plan gratuito<br>Railway (backend + DB): <strong>~$5 USD/mes</strong><br>Dominio propio (opcional): ~$10 USD/año<br>MercadoPago: comisión por transacción (~3,5%)</div></div>
-      <div class="bsum"><div class="bsl">TOTAL DESARROLLO</div><div class="bsv">$616.000</div><div class="bss">176 horas · tarifa junior $3.500/h<br>Damián usa iPhone con nivel tech 5/5<br>Conoce apps similares pagas — ventaja competitiva</div></div>
+
+    <!-- HOSTING + BACKUP -->
+    <div class="alg">
+      <div class="alc">
+        <div class="alt y">🖥️ Hosting — Fases del proyecto</div>
+        <div class="ali"><div class="ald y"></div><strong>Fase inicial (desarrollo):</strong> server ILM — Instituto Leonardo Murialdo</div>
+        <div class="ali"><div class="ald y"></div><strong>Opción 1 — DylanHost</strong> (local · pesos ARS): desde ~$2.150/mes · servidores en Argentina · SSL incluido</div>
+        <div class="ali"><div class="ald y"></div><strong>Opción 2 — Hostinger</strong> (internacional): desde ~$2.700/mes · servidores en Latinoamérica · SSL · soporte 24/7</div>
+        <div class="ali"><div class="ald y"></div>El cliente no cuenta con hosting propio — se contratará servicio externo para producción</div>
+      </div>
+      <div class="alc">
+        <div class="alt" style="color:var(--navy)">💾 Sistema de Backup</div>
+        <div class="ali"><div class="ald y"></div><strong>GitHub:</strong> control de versiones, commits y rollback de código</div>
+        <div class="ali"><div class="ald y"></div><strong>Backup de BD:</strong> sistema independiente — respaldo automático de datos (alumnos, pagos, reservas)</div>
+        <div class="ali"><div class="ald y"></div><strong>Herramienta:</strong> pg_dump (PostgreSQL) con backups programados automáticamente</div>
+        <div class="ali"><div class="ald y"></div><strong>Almacenamiento:</strong> nube (Google Drive) con retención de 30 días</div>
+        <div class="ali"><div class="ald y"></div>GitHub ≠ Backup de datos: dos sistemas distintos con funciones distintas</div>
+      </div>
     </div>
+
   </div>
 </div>
 
